@@ -1,0 +1,372 @@
+{
+    "operator": "SAPST",
+    "service": "Navette Intrasite Gratuite",
+    "description": "Free intrasite shuttle service connecting Tamraght (Aourir) and Taghazout village through Taghazout Bay.",
+    "website": "www.taghazoutbay.ma",
+    "price": 0,
+    "currency": "MAD",
+    "availability": "7j/7j",
+    "hours": "09:00–22:00",
+    "stops": [
+      { "id": 1,  "name": "Village Tamraght - Aourir" },
+      { "id": 2,  "name": "Hôtel Pickalbatros" },
+      { "id": 3,  "name": "Hôtel Fairmont" },
+      { "id": 4,  "name": "Hôtel Hilton" },
+      { "id": 5,  "name": "Hôtel Hyatt Place" },
+      { "id": 6,  "name": "Golf Tazegzout - Club House" },
+      { "id": 7,  "name": "Médina - Tawenza Square" },
+      { "id": 8,  "name": "Hôtel Hyatt Regency" },
+      { "id": 9,  "name": "Hôtel Riu Palace Tikida" },
+      { "id": 10, "name": "Hôtel Radisson Blu" },
+      { "id": 11, "name": "Musée Targant" },
+      { "id": 12, "name": "Village Taghazout" }
+    ],
+    "routes": [
+      {
+        "id": "sapst-tamraght-taghazout",
+        "from": "Village Tamraght - Aourir",
+        "to": "Village Taghazout",
+        "direction": "vers_taghazout",
+        "passages": [
+          {
+            "passage": 1,
+            "schedule": [
+              { "stop_id": 1,  "time": "10:00" },
+              { "stop_id": 2,  "time": "10:04" },
+              { "stop_id": 3,  "time": "10:11" },
+              { "stop_id": 4,  "time": "10:18" },
+              { "stop_id": 5,  "time": "10:26" },
+              { "stop_id": 6,  "time": "10:30" },
+              { "stop_id": 7,  "time": "10:34" },
+              { "stop_id": 8,  "time": "10:42" },
+              { "stop_id": 9,  "time": "10:49" },
+              { "stop_id": 10, "time": "10:55" },
+              { "stop_id": 11, "time": "10:58" },
+              { "stop_id": 12, "time": "11:04" }
+            ]
+          },
+          {
+            "passage": 2,
+            "schedule": [
+              { "stop_id": 1,  "time": "11:00" },
+              { "stop_id": 2,  "time": "11:04" },
+              { "stop_id": 3,  "time": "11:11" },
+              { "stop_id": 4,  "time": "11:18" },
+              { "stop_id": 5,  "time": "11:26" },
+              { "stop_id": 6,  "time": "11:30" },
+              { "stop_id": 7,  "time": "11:34" },
+              { "stop_id": 8,  "time": "11:42" },
+              { "stop_id": 9,  "time": "11:49" },
+              { "stop_id": 10, "time": "11:55" },
+              { "stop_id": 11, "time": "11:58" },
+              { "stop_id": 12, "time": "12:04" }
+            ]
+          },
+          {
+            "passage": 3,
+            "schedule": [
+              { "stop_id": 1,  "time": "12:22" },
+              { "stop_id": 2,  "time": "12:26" },
+              { "stop_id": 3,  "time": "12:33" },
+              { "stop_id": 4,  "time": "12:41" },
+              { "stop_id": 5,  "time": "12:48" },
+              { "stop_id": 6,  "time": "12:52" },
+              { "stop_id": 7,  "time": "12:57" },
+              { "stop_id": 8,  "time": "13:04" },
+              { "stop_id": 9,  "time": "13:11" },
+              { "stop_id": 10, "time": "13:18" },
+              { "stop_id": 11, "time": "13:21" },
+              { "stop_id": 12, "time": "13:27" }
+            ]
+          },
+          {
+            "passage": 4,
+            "schedule": [
+              { "stop_id": 1,  "time": "13:23" },
+              { "stop_id": 2,  "time": "13:27" },
+              { "stop_id": 3,  "time": "13:34" },
+              { "stop_id": 4,  "time": "13:41" },
+              { "stop_id": 5,  "time": "13:49" },
+              { "stop_id": 6,  "time": "13:53" },
+              { "stop_id": 7,  "time": "13:57" },
+              { "stop_id": 8,  "time": "14:05" },
+              { "stop_id": 9,  "time": "14:12" },
+              { "stop_id": 10, "time": "14:18" },
+              { "stop_id": 11, "time": "14:22" },
+              { "stop_id": 12, "time": "14:27" }
+            ]
+          },
+          {
+            "passage": 5,
+            "schedule": [
+              { "stop_id": 1,  "time": "15:05" },
+              { "stop_id": 2,  "time": "15:09" },
+              { "stop_id": 3,  "time": "15:16" },
+              { "stop_id": 4,  "time": "15:24" },
+              { "stop_id": 5,  "time": "15:31" },
+              { "stop_id": 6,  "time": "15:35" },
+              { "stop_id": 7,  "time": "15:40" },
+              { "stop_id": 8,  "time": "15:47" },
+              { "stop_id": 9,  "time": "15:54" },
+              { "stop_id": 10, "time": "16:00" },
+              { "stop_id": 11, "time": "16:04" },
+              { "stop_id": 12, "time": "16:09" }
+            ]
+          },
+          {
+            "passage": 6,
+            "schedule": [
+              { "stop_id": 1,  "time": "16:05" },
+              { "stop_id": 2,  "time": "16:10" },
+              { "stop_id": 3,  "time": "16:17" },
+              { "stop_id": 4,  "time": "16:24" },
+              { "stop_id": 5,  "time": "16:32" },
+              { "stop_id": 6,  "time": "16:35" },
+              { "stop_id": 7,  "time": "16:40" },
+              { "stop_id": 8,  "time": "16:48" },
+              { "stop_id": 9,  "time": "16:54" },
+              { "stop_id": 10, "time": "17:01" },
+              { "stop_id": 11, "time": "17:04" },
+              { "stop_id": 12, "time": "17:10" }
+            ]
+          },
+          {
+            "passage": 7,
+            "schedule": [
+              { "stop_id": 1,  "time": "17:28" },
+              { "stop_id": 2,  "time": "17:32" },
+              { "stop_id": 3,  "time": "17:39" },
+              { "stop_id": 4,  "time": "17:46" },
+              { "stop_id": 5,  "time": "17:54" },
+              { "stop_id": 6,  "time": "17:58" },
+              { "stop_id": 7,  "time": "18:02" },
+              { "stop_id": 8,  "time": "18:10" },
+              { "stop_id": 9,  "time": "18:17" },
+              { "stop_id": 10, "time": "18:23" },
+              { "stop_id": 11, "time": "18:26" },
+              { "stop_id": 12, "time": "18:32" }
+            ]
+          },
+          {
+            "passage": 8,
+            "schedule": [
+              { "stop_id": 1,  "time": "18:28" },
+              { "stop_id": 2,  "time": "18:32" },
+              { "stop_id": 3,  "time": "18:39" },
+              { "stop_id": 4,  "time": "18:47" },
+              { "stop_id": 5,  "time": "18:54" },
+              { "stop_id": 6,  "time": "18:58" },
+              { "stop_id": 7,  "time": "19:03" },
+              { "stop_id": 8,  "time": "19:10" },
+              { "stop_id": 9,  "time": "19:17" },
+              { "stop_id": 10, "time": "19:24" },
+              { "stop_id": 11, "time": "19:27" },
+              { "stop_id": 12, "time": "19:32" }
+            ]
+          },
+          {
+            "passage": 9,
+            "schedule": [
+              { "stop_id": 1,  "time": "19:50" },
+              { "stop_id": 2,  "time": "19:54" },
+              { "stop_id": 3,  "time": "20:01" },
+              { "stop_id": 4,  "time": "20:09" },
+              { "stop_id": 5,  "time": "20:16" },
+              { "stop_id": 6,  "time": "20:20" },
+              { "stop_id": 7,  "time": "20:25" },
+              { "stop_id": 8,  "time": "20:33" },
+              { "stop_id": 9,  "time": "20:39" },
+              { "stop_id": 10, "time": "20:46" },
+              { "stop_id": 11, "time": "20:49" },
+              { "stop_id": 12, "time": "20:55" }
+            ]
+          },
+          {
+            "passage": 10,
+            "schedule": [
+              { "stop_id": 1,  "time": "22:13" },
+              { "stop_id": 2,  "time": "22:17" },
+              { "stop_id": 3,  "time": "22:24" },
+              { "stop_id": 4,  "time": "22:32" },
+              { "stop_id": 5,  "time": "22:39" },
+              { "stop_id": 6,  "time": "22:43" },
+              { "stop_id": 7,  "time": "22:48" },
+              { "stop_id": 8,  "time": "22:55" },
+              { "stop_id": 9,  "time": "23:02" },
+              { "stop_id": 10, "time": "23:09" },
+              { "stop_id": 11, "time": "23:12" },
+              { "stop_id": 12, "time": "23:17" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sapst-taghazout-tamraght",
+        "from": "Village Taghazout",
+        "to": "Village Tamraght - Aourir",
+        "direction": "vers_aourir",
+        "passages": [
+          {
+            "passage": 1,
+            "schedule": [
+              { "stop_id": 12, "time": "11:09" },
+              { "stop_id": 10, "time": "11:14" },
+              { "stop_id": 9,  "time": "11:21" },
+              { "stop_id": 8,  "time": "11:27" },
+              { "stop_id": 7,  "time": "11:35" },
+              { "stop_id": 6,  "time": "11:42" },
+              { "stop_id": 5,  "time": "11:46" },
+              { "stop_id": 4,  "time": "11:54" },
+              { "stop_id": 3,  "time": "12:01" },
+              { "stop_id": 2,  "time": "12:08" },
+              { "stop_id": 1,  "time": "12:12" }
+            ]
+          },
+          {
+            "passage": 2,
+            "schedule": [
+              { "stop_id": 12, "time": "12:09" },
+              { "stop_id": 10, "time": "12:15" },
+              { "stop_id": 9,  "time": "12:21" },
+              { "stop_id": 8,  "time": "12:28" },
+              { "stop_id": 7,  "time": "12:35" },
+              { "stop_id": 6,  "time": "12:43" },
+              { "stop_id": 5,  "time": "12:46" },
+              { "stop_id": 4,  "time": "12:54" },
+              { "stop_id": 3,  "time": "13:02" },
+              { "stop_id": 2,  "time": "13:09" },
+              { "stop_id": 1,  "time": "13:13" }
+            ]
+          },
+          {
+            "passage": 3,
+            "schedule": [
+              { "stop_id": 12, "time": "13:32" },
+              { "stop_id": 10, "time": "13:37" },
+              { "stop_id": 9,  "time": "13:43" },
+              { "stop_id": 8,  "time": "13:50" },
+              { "stop_id": 7,  "time": "13:57" },
+              { "stop_id": 6,  "time": "14:05" },
+              { "stop_id": 5,  "time": "14:09" },
+              { "stop_id": 4,  "time": "14:17" },
+              { "stop_id": 3,  "time": "12:24" },
+              { "stop_id": 2,  "time": "14:31" },
+              { "stop_id": 1,  "time": "14:35" }
+            ]
+          },
+          {
+            "passage": 4,
+            "schedule": [
+              { "stop_id": 12, "time": "14:32" },
+              { "stop_id": 10, "time": "14:37" },
+              { "stop_id": 9,  "time": "14:44" },
+              { "stop_id": 8,  "time": "14:50" },
+              { "stop_id": 7,  "time": "14:58" },
+              { "stop_id": 6,  "time": "15:05" },
+              { "stop_id": 5,  "time": "15:09" },
+              { "stop_id": 4,  "time": "15:17" },
+              { "stop_id": 3,  "time": "15:25" },
+              { "stop_id": 2,  "time": "15:32" },
+              { "stop_id": 1,  "time": "15:35" }
+            ]
+          },
+          {
+            "passage": 5,
+            "schedule": [
+              { "stop_id": 12, "time": "16:14" },
+              { "stop_id": 10, "time": "16:20" },
+              { "stop_id": 9,  "time": "16:26" },
+              { "stop_id": 8,  "time": "16:33" },
+              { "stop_id": 7,  "time": "16:40" },
+              { "stop_id": 6,  "time": "16:47" },
+              { "stop_id": 5,  "time": "16:51" },
+              { "stop_id": 4,  "time": "16:59" },
+              { "stop_id": 3,  "time": "17:07" },
+              { "stop_id": 2,  "time": "17:14" },
+              { "stop_id": 1,  "time": "17:18" }
+            ]
+          },
+          {
+            "passage": 6,
+            "schedule": [
+              { "stop_id": 12, "time": "17:15" },
+              { "stop_id": 10, "time": "17:20" },
+              { "stop_id": 9,  "time": "17:27" },
+              { "stop_id": 8,  "time": "17:33" },
+              { "stop_id": 7,  "time": "17:41" },
+              { "stop_id": 6,  "time": "17:48" },
+              { "stop_id": 5,  "time": "17:52" },
+              { "stop_id": 4,  "time": "18:00" },
+              { "stop_id": 3,  "time": "18:07" },
+              { "stop_id": 2,  "time": "18:14" },
+              { "stop_id": 1,  "time": "18:18" }
+            ]
+          },
+          {
+            "passage": 7,
+            "schedule": [
+              { "stop_id": 12, "time": "18:37" },
+              { "stop_id": 10, "time": "18:42" },
+              { "stop_id": 9,  "time": "18:49" },
+              { "stop_id": 8,  "time": "18:55" },
+              { "stop_id": 7,  "time": "19:03" },
+              { "stop_id": 6,  "time": "19:10" },
+              { "stop_id": 5,  "time": "19:14" },
+              { "stop_id": 4,  "time": "19:22" },
+              { "stop_id": 3,  "time": "19:29" },
+              { "stop_id": 2,  "time": "19:36" },
+              { "stop_id": 1,  "time": "19:40" }
+            ]
+          },
+          {
+            "passage": 8,
+            "schedule": [
+              { "stop_id": 12, "time": "19:37" },
+              { "stop_id": 10, "time": "19:43" },
+              { "stop_id": 9,  "time": "19:49" },
+              { "stop_id": 8,  "time": "19:56" },
+              { "stop_id": 7,  "time": "20:03" },
+              { "stop_id": 6,  "time": "20:11" },
+              { "stop_id": 5,  "time": "20:14" },
+              { "stop_id": 4,  "time": "20:22" },
+              { "stop_id": 3,  "time": "20:30" },
+              { "stop_id": 2,  "time": "20:37" },
+              { "stop_id": 1,  "time": "20:41" }
+            ]
+          },
+          {
+            "passage": 9,
+            "schedule": [
+              { "stop_id": 12, "time": "21:00" },
+              { "stop_id": 10, "time": "21:05" },
+              { "stop_id": 9,  "time": "21:12" },
+              { "stop_id": 8,  "time": "21:18" },
+              { "stop_id": 7,  "time": "21:26" },
+              { "stop_id": 6,  "time": "21:33" },
+              { "stop_id": 5,  "time": "21:37" },
+              { "stop_id": 4,  "time": "21:45" },
+              { "stop_id": 3,  "time": "21:52" },
+              { "stop_id": 2,  "time": "21:59" },
+              { "stop_id": 1,  "time": "22:03" }
+            ]
+          },
+          {
+            "passage": 10,
+            "schedule": [
+              { "stop_id": 12, "time": "23:22" },
+              { "stop_id": 10, "time": "23:28" },
+              { "stop_id": 9,  "time": "23:34" },
+              { "stop_id": 8,  "time": "23:41" },
+              { "stop_id": 7,  "time": "23:48" },
+              { "stop_id": 6,  "time": "23:56" },
+              { "stop_id": 5,  "time": "23:59" },
+              { "stop_id": 4,  "time": "00:07" },
+              { "stop_id": 3,  "time": "00:15" },
+              { "stop_id": 2,  "time": "00:22" },
+              { "stop_id": 1,  "time": "00:26" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
