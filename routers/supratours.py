@@ -56,7 +56,6 @@ async def search_supratours(origin: str, destination: str, travel_date: date) ->
         ))
     return results
 
-
 @router.get("/stops")
 async def supratours_stops():
     # NOTE: these also have GPS co-ordinates
