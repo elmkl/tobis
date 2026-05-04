@@ -1,6 +1,6 @@
+import httpx
 from datetime import date
 from typing import Optional
-import httpx
 from fastapi import APIRouter, HTTPException
 from data.cities import CITIES
 from models.journey import Journey

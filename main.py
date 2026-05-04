@@ -4,6 +4,7 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from data.cities import CITIES
 from routers import ctm, supratours, casabus
+from models.journey import Journey
 
 # scaffolding
 app = FastAPI(title="tobis", description="API for public transit in Morocco", version="0.1.0",)
@@ -21,3 +22,10 @@ async def root():
 @app.get("/cities")
 async def list_cities():
     return {"count": len(CITIES), "cities": sorted(CITIES.keys())}
+
+ 
+@app.get("/search", response_model=list[Journey])
+async def search(from_city: str = Query(..., alias="from"), 
+                to_city: str = Query(..., alias="to"),
+                travel_date: date = Query(default_factory=date.today),):
+    return "ok"

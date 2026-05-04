@@ -1,5 +1,5 @@
-from datetime import date
 import httpx
+from datetime import date
 from fastapi import APIRouter, HTTPException
 from data.cities import CITIES
 from models.journey import Journey
@@ -42,7 +42,6 @@ async def search_supratours(origin: str, destination: str, travel_date: date) ->
         prix_segments = voyageur.get("prixSegments", [])
         price = prix_segments[0]["prix"] if prix_segments else None
         is_bus = seg.get("numeroCommercial", "").startswith("N")
-
         results.append(Journey(
             operator="Supratours" if is_bus else "ONCF",
             origin=seg["GareDepart"]["descriptionFr"],

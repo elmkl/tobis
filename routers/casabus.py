@@ -1,9 +1,9 @@
 import httpx
 from fastapi import APIRouter, HTTPException
- 
+
 router = APIRouter(prefix="/operators/casabus", tags=["ALSA Casablanca"])
 http = httpx.AsyncClient(timeout=15)
- 
+
 @router.get("/routes")
 async def casabus_routes():
     try:
@@ -13,7 +13,7 @@ async def casabus_routes():
         return {"count": len(data), "routes": data}
     except Exception as e:
         raise HTTPException(status_code=502, detail=str(e))
- 
+
 @router.get("/routes/{route_id}")
 async def casabus_route_detail(route_id: str, switched: bool = False):
     # TODO: does this have gps data?
