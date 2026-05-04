@@ -216,6 +216,5 @@ CITIES: dict[str, dict] = {
     "zag": {"ctm_stop_id": None, "ctm_city_id": None, "supratours_code": "762"},
     "zagora": {"ctm_stop_id": 396, "ctm_city_id": 5607, "supratours_code": "834"},
     "zaida": {"ctm_stop_id": 582, "ctm_city_id": 5762, "supratours_code": None},
-    "zaouiat chehch": {"ctm_stop_id": None, "ctm_city_id": None, "supratours_code": "816"},
-    "zaouit echeikh": {"ctm_stop_id": 397, "ctm_city_id": 5732, "supratours_code": None},
+    "zaouit echeikh": {"ctm_stop_id": 397, "ctm_city_id": 5732, "supratours_code": "816"},
 }
