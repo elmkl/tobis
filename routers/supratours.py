@@ -1,11 +1,21 @@
-import httpx
 from datetime import date
+
+import httpx
 from fastapi import APIRouter, HTTPException
+
 from data.cities import CITIES
 from models.journey import Journey
 
 router = APIRouter(prefix="/operators/supratours", tags=["Supratours / ONCF"])
-http = httpx.AsyncClient(timeout=15)
+http = httpx.AsyncClient(
+    timeout=15,
+    verify=False,
+    headers={
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0 Safari/537.36",
+        "Origin": "https://www.supratours.ma",
+        "Referer": "https://www.supratours.ma/",
+    },
+)
 
 async def search_supratours(origin: str, destination: str, travel_date: date) -> list[Journey]:
     o = CITIES.get(origin)
@@ -32,7 +42,8 @@ async def search_supratours(origin: str, destination: str, travel_date: date) ->
         r = await http.post("https://www.supratours.ma/api/disponibilite", json=payload)
         r.raise_for_status()
         trajets = r.json()["body"].get("listTrajetsAller", [])
-    except Exception:
+    except Exception as e:
+        print(f"[Supratours] search failed: {e}")
         return []
 
     results = []
@@ -41,7 +52,8 @@ async def search_supratours(origin: str, destination: str, travel_date: date) ->
         voyageur = t["listeVoyageurs"][0] if t.get("listeVoyageurs") else {}
         prix_segments = voyageur.get("prixSegments", [])
         price = prix_segments[0]["prix"] if prix_segments else None
-        is_bus = seg.get("numeroCommercial", "").startswith("N")
+        is_bus = seg.get("codeClassification", "").lower() == "au"
+
         results.append(Journey(
             operator="Supratours" if is_bus else "ONCF",
             origin=seg["GareDepart"]["descriptionFr"],
@@ -57,7 +69,7 @@ async def search_supratours(origin: str, destination: str, travel_date: date) ->
 
 @router.get("/stops")
 async def supratours_stops():
-    # NOTE: these also have GPS co-ordinates
+    # NOTE: these have GPS co-ordinates
     try:
         r = await http.get("https://www.supratours.ma/api/stations")
         r.raise_for_status()
