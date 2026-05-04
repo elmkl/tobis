@@ -1,4 +1,5 @@
 # tobis
 API for public transit &amp; shuttles in Morocco 🇲🇦
 
-datasets: CTM, Supratours, SAPST, Casabus (ALSA Casablanca)
+live datasets: ALSA, CTM, Supratours, Casabus (ALSA Casablanca)
+low accuracy datasets: Laayoune Bus, SAPST Taghazout Bay, Al Akhawayn University
