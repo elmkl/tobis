@@ -1,6 +1,9 @@
 import httpx
 from fastapi import APIRouter, HTTPException
+import json
+import pathlib
 
+DATA_DIR = pathlib.Path(__file__).parent.parent / "data"
 router = APIRouter(prefix="/urban/alsa", tags=["Urban"])
 
 CITIES = {
@@ -38,6 +41,32 @@ def _city(name):
 @router.get("/cities")
 async def alsa_cities():
     return list(CITIES.keys())
+
+
+@router.get("/agadir/aerobus")
+async def agadir_aerobus():
+    cfg = CITIES["agadir"]
+    async with _client(cfg["subdomain"]) as c:
+        try:
+            r = await c.post(f"/lignes{_QS}", content=_body(cfg["city_id"]))
+            r.raise_for_status()
+            lines = r.json().get("lines", [])
+        except Exception as e:
+            raise HTTPException(502, str(e))
+
+    lae = next((l for l in lines if l["id"] == "L-AE"), None)
+    if not lae:
+        raise HTTPException(404, "L-AE not found in ALSA Agadir response")
+
+    static = json.loads((DATA_DIR / "agadir_aerobus.json").read_text())
+    
+    # enrich data with live entry and static data
+    lae["price_MAD"] = static["price_MAD"]
+    lae["price_roundtrip_MAD"] = static["price_roundtrip_MAD"]
+    lae["airport_assistance"] = static["airport_assistance"]
+    lae["schedule"] = static["schedule"]
+
+    return lae
 
 @router.get("/{city}/routes")
 async def alsa_routes(city: str):

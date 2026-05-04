@@ -49,4 +49,4 @@ async def search(from_city: str = Query(..., alias="from"),
     results.sort(key=lambda d: d.departure)
     return results
 
-# TODO: add urban providers?
+# TODO: add urban providers? and split scheduled and live hours
