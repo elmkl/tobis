@@ -1,0 +1,176 @@
+{
+    "operator": "Laayoune Bus",
+    "operator_ar": "حافلات العيون",
+    "city": "laayoune",
+    "price_per_trip_MAD": 2,
+    "notes": "Subscription card (Hafilati): 20 trips = 50 MAD, 50 trips = 100 MAD. Card costs 50 MAD first time.",
+    "subscription_lines": ["L1", "L2", "L5", "L6", "L7", "L9"],
+    "lines": [
+      {
+        "id": "L1",
+        "number": "01",
+        "color": "#1E88E5",
+        "duration_min": 60,
+        "bidirectional": true,
+        "type": "urban",
+        "stops": [
+          "Hay Al Qassam",
+          "Souk Jamal",
+          "Hay Al Massira",
+          "Avenue Zerktouni",
+          "Avenue Mohammed VI",
+          "Hay Raha",
+          "Hay Wifaq C",
+          "Hay Wifaq Grand G"
+        ]
+      },
+      {
+        "id": "L2",
+        "number": "02",
+        "color": "#00BCD4",
+        "duration_min": 60,
+        "bidirectional": true,
+        "type": "urban",
+        "stops": [
+          "Hay Al Qassam",
+          "Souk Jamal",
+          "Hay Al Massira",
+          "Avenue Zerktouni",
+          "Avenue Mohammed VI",
+          "Hay Douirat",
+          "Avenue Boukraa",
+          "Hôpital Al Awda",
+          "Mosquée Al Massira",
+          "Lycée Technique",
+          "Hay 25 Mars"
+        ]
+      },
+      {
+        "id": "L3",
+        "number": "03",
+        "color": "#8E24AA",
+        "duration_min": null,
+        "bidirectional": true,
+        "type": "urban",
+        "stops": [
+          "Souk Namoujji",
+          "Avenue Al Haramayn",
+          "Hay Hajri",
+          "Ras Al Khayma",
+          "Avenue Tan Tan",
+          "Avenue Mohammed VI",
+          "Hay Raha",
+          "Hay Wifaq Grand G"
+        ]
+      },
+      {
+        "id": "L7",
+        "number": "07",
+        "color": "#FF6F00",
+        "duration_min": 60,
+        "bidirectional": true,
+        "type": "urban",
+        "stops": [
+          "Hay Al Qassam",
+          "Souk Jamal",
+          "Hay Al Massira",
+          "Avenue Zerktouni",
+          "Avenue Mohammed VI",
+          "Hay Omran",
+          "Hay Wifaq Grand G"
+        ]
+      },
+      {
+        "id": "L9",
+        "number": "09",
+        "color": "#B71C1C",
+        "duration_min": 60,
+        "bidirectional": true,
+        "type": "urban",
+        "stops": [
+          "Hay Al Qassam",
+          "Souk Jamal",
+          "Hay Al Massira",
+          "Avenue Zerktouni",
+          "Avenue Mohammed VI",
+          "Hay Douirat",
+          "Avenue Boukraa",
+          "Lycée Ibn Batouta",
+          "Place Al Baydaa",
+          "Hay Al Awda",
+          "Lycée Technique",
+          "Hay 25 Mars"
+        ]
+      },
+      {
+        "id": "L11",
+        "number": "11",
+        "color": "#00897B",
+        "duration_min": null,
+        "bidirectional": true,
+        "type": "urban",
+        "stops": [
+          "Souk Namoujji",
+          "Avenue Al Haramayn",
+          "Hay Hajri",
+          "Ras Al Khayma",
+          "Avenue Tan Tan",
+          "Avenue Mohammed VI",
+          "Hay Douirat",
+          "Hay Al Awda",
+          "Hay 25 Mars"
+        ]
+      },
+      {
+        "id": "L18",
+        "number": "18",
+        "color": "#43A047",
+        "duration_min": 80,
+        "bidirectional": true,
+        "type": "suburban",
+        "notes": "Renamed from L8 on 2022-09-27. Connects Laayoune to Fam Al Oued and La Marsa.",
+        "timetable": {
+          "first_trip": {
+            "from": "Hay 25 Mars",
+            "to": "La Marsa",
+            "departure": "06:20",
+            "arrival": "07:50"
+          },
+          "regular_trips": {
+            "from": "Place Nakjir",
+            "to": "La Marsa",
+            "first_departure": "07:30",
+            "first_arrival": "08:30",
+            "last_departure": "21:00",
+            "last_arrival": "22:00"
+          }
+        },
+        "stops": [
+          "Laayoune",
+          "Fam Al Oued",
+          "La Marsa"
+        ]
+      },
+      {
+        "id": "L33",
+        "number": "33",
+        "color": "#F4511E",
+        "duration_min": null,
+        "bidirectional": true,
+        "type": "urban",
+        "notes": "New line.",
+        "stops": [
+          "Hôtel Nakjir",
+          "Avenue La Mecque",
+          "Avenue Zerktouni",
+          "Collège Allal",
+          "Collège Tanmiya",
+          "Hay Al Massira",
+          "Kharsito",
+          "Place Al Houriya",
+          "Hôpital Militaire",
+          "Prison Locale"
+        ]
+      }
+    ]
+  }

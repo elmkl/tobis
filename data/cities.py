@@ -110,7 +110,7 @@ CITIES: dict[str, dict] = {
     "ksar el kebir": {"ctm_stop_id": 338, "ctm_city_id": 5628, "supratours_code": None},
     "ktama issaguen": {"ctm_stop_id": 339, "ctm_city_id": 5699, "supratours_code": None},
     "laayoune": {"ctm_stop_id": 340, "ctm_city_id": 5601, "supratours_code": "790"},
-    "laayoune port": {"ctm_stop_id": None, "ctm_city_id": None, "supratours_code": "791"},
+    "laayoune port": {"ctm_stop_id": None, "ctm_city_id": None, "supratours_code": "791"}, # aka Al Marsa
     "lamhariz": {"ctm_stop_id": None, "ctm_city_id": None, "supratours_code": "776"},
     "larache": {"ctm_stop_id": 343, "ctm_city_id": 5657, "supratours_code": "324"},
     "m'hamid el ghizlane": {"ctm_stop_id": 342, "ctm_city_id": 5697, "supratours_code": None},
