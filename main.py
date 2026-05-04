@@ -20,4 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
  
-# TODO: do literally evreything
+# TODO: add routers
+ 
+@app.get("/")
+async def root():
+    return {"name": "tobis", "version": "0.1.0", "status": "ok"}
