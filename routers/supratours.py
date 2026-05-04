@@ -53,7 +53,6 @@ async def search_supratours(origin: str, destination: str, travel_date: date) ->
         prix_segments = voyageur.get("prixSegments", [])
         price = prix_segments[0]["prix"] if prix_segments else None
         is_bus = seg.get("codeClassification", "").lower() == "au"
-
         results.append(Journey(
             operator="Supratours" if is_bus else "ONCF",
             origin=seg["GareDepart"]["descriptionFr"],
@@ -65,6 +64,7 @@ async def search_supratours(origin: str, destination: str, travel_date: date) ->
             available_seats=None,
             brand=seg.get("codeClassification"),
         ))
+
     return results
 
 @router.get("/stops")

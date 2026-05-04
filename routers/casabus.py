@@ -18,10 +18,8 @@ async def casabus_routes():
 async def casabus_route_detail(route_id: str, switched: bool = False):
     # TODO: does this have gps data?
     try:
-        r = await http.post(
-            "https://api.alsaalbaida.ma/api/Routes/routedetail",
-            json={"routeId": route_id, "isSwitched": switched},
-        )
+        r = await http.post("https://api.alsaalbaida.ma/api/Routes/routedetail",
+            json={"routeId": route_id, "isSwitched": switched},)
         r.raise_for_status()
         return r.json()["data"]
     except Exception as e:

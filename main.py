@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from data.cities import CITIES
 from models.journey import Journey
-from routers import casabus, ctm, sapst, supratours
+from routers import alsa, casabus, ctm, sapst, supratours
 from routers.ctm import search_ctm
 from routers.supratours import search_supratours
 
@@ -16,6 +16,7 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 app.include_router(ctm.router)
 app.include_router(supratours.router)
 app.include_router(casabus.router)
+app.include_router(alsa.router)
 
 # TODO: make a web portal for reviewer :D
 @app.get("/")
