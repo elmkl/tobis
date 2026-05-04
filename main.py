@@ -1,18 +1,21 @@
 import asyncio
 from datetime import date
-from typing import Optional
- 
-import httpx
-from fastapi import FastAPI, Query, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
- 
+from data.cities import CITIES
+from routers import ctm
+
 # scaffolding
 app = FastAPI(title="tobis", description="API for public transit in Morocco", version="0.1.0",)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"],)
- 
-# TODO: add routers
- 
+
+# TODO: add more routers
+app.include_router(ctm.router)
+
 @app.get("/")
 async def root():
     return {"name": "tobis", "version": "0.1.0", "status": "ok"}
+
+@app.get("/cities")
+async def list_cities():
+    return {"count": len(CITIES), "cities": sorted(CITIES.keys())}
