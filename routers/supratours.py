@@ -1,12 +1,10 @@
 from datetime import date
-
 import httpx
 from fastapi import APIRouter, HTTPException
-
 from data.cities import CITIES
 from models.journey import Journey
 
-router = APIRouter(prefix="/operators/supratours", tags=["Supratours / ONCF"])
+router = APIRouter(prefix="/national/supratours", tags=["National"])
 http = httpx.AsyncClient(
     timeout=15,
     verify=False,

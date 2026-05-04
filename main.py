@@ -17,6 +17,7 @@ app.include_router(ctm.router)
 app.include_router(supratours.router)
 app.include_router(casabus.router)
 app.include_router(alsa.router)
+app.include_router(sapst.router)
 
 # TODO: make a web portal for reviewer :D
 @app.get("/")
@@ -27,7 +28,8 @@ async def root():
 async def list_cities():
     return {"count": len(CITIES), "cities": sorted(CITIES.keys())}
 
-@app.get("/search", response_model=list[Journey])
+# search national providers
+@app.get("/national/search", response_model=list[Journey])
 async def search(from_city: str = Query(..., alias="from"), 
                 to_city: str = Query(..., alias="to"),
                 travel_date: date = Query(default_factory=date.today),):
@@ -42,8 +44,9 @@ async def search(from_city: str = Query(..., alias="from"),
         search_ctm(from_city, to_city, travel_date),
         search_supratours(from_city, to_city, travel_date),
     )
-    # TODO: add casabus
  
     results = ctm_results + supra_results # gather results together
     results.sort(key=lambda d: d.departure)
     return results
+
+# TODO: add urban providers?

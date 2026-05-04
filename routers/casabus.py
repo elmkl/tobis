@@ -1,7 +1,7 @@
 import httpx
 from fastapi import APIRouter, HTTPException
 
-router = APIRouter(prefix="/operators/casabus", tags=["ALSA Casablanca"])
+router = APIRouter(prefix="/urban/casablanca", tags=["Urban"])
 http = httpx.AsyncClient(timeout=15)
 
 @router.get("/routes")

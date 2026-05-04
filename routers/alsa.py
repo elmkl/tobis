@@ -1,12 +1,12 @@
 import httpx
 from fastapi import APIRouter, HTTPException
 
-router = APIRouter(prefix="/operators/alsa", tags=["ALSA"])
+router = APIRouter(prefix="/urban/alsa", tags=["Urban"])
 
 CITIES = {
-    "agadir":    {"subdomain": "agadir", "city_id": 2},
+    "agadir":    {"subdomain": "agadir",    "city_id": 2},
     "khouribga": {"subdomain": "khouribga", "city_id": 4},
-    "rabat":     {"subdomain": "rabat", "city_id": 5},
+    "rabat":     {"subdomain": "rabat",     "city_id": 5},
     # TODO: Does alsa have more websites in secret?
 }
 

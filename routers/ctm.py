@@ -5,7 +5,7 @@ from fastapi import APIRouter, HTTPException
 from data.cities import CITIES
 from models.journey import Journey
 
-router = APIRouter(prefix="/operators/ctm", tags=["CTM"])
+router = APIRouter(prefix="/national/ctm", tags=["National"])
 http = httpx.AsyncClient(timeout=15)
 
 async def search_ctm(origin: str, destination: str, travel_date: date) -> list[Journey]:

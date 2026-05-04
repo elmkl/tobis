@@ -2,7 +2,7 @@ import json
 import pathlib
 from fastapi import APIRouter, HTTPException
  
-router = APIRouter(prefix="/operators/sapst", tags=["SAPST Taghazout Bay"])
+router = APIRouter(prefix="/urban/taghazout", tags=["Urban"])
 DATA_DIR = pathlib.Path(__file__).parent.parent / "data"
  
 # TODO: maybe one file for all static data?  
