@@ -54,6 +54,7 @@ async def agadir_aerobus():
         except Exception as e:
             raise HTTPException(502, str(e))
 
+    # L-AE = shuttle for airport to city centre
     lae = next((l for l in lines if l["id"] == "L-AE"), None)
     if not lae:
         raise HTTPException(404, "L-AE not found in ALSA Agadir response")

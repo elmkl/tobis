@@ -44,7 +44,7 @@ async def search(from_city: str = Query(..., alias="from"),
         search_ctm(from_city, to_city, travel_date),
         search_supratours(from_city, to_city, travel_date),
     )
- 
+
     results = ctm_results + supra_results # gather results together
     results.sort(key=lambda d: d.departure)
     return results
