@@ -14,3 +14,4 @@ class Journey(BaseModel):
     amenities: list[str] = []
     brand: Optional[str] = None
     for_sale: bool = True
+    status: str = "scheduled"  # scheduled | running | arrived
