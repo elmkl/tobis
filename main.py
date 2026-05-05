@@ -59,7 +59,11 @@ def update_journey_status(journey: Journey) -> Journey:
 
 @app.get("/")
 async def root():
-    return {"name": "tobis", "version": "0.1.0", "status": "ok"}
+    return {"name": "tobis", "version": "0.1.0", "status": "ok", "human": "pls go on /portal"}
+
+@app.get("/logo.png", include_in_schema=False)
+async def serve_logo():
+    return FileResponse("logo.png")
 
 @app.get("/portal", response_class=FileResponse)
 async def web_portal():
