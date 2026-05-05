@@ -8,7 +8,7 @@ from models.journey import Journey
 router = APIRouter(prefix="/national/ctm", tags=["National"])
 http = httpx.AsyncClient(timeout=15)
 
-async def search_ctm(origin: str, destination: str, travel_date: date) -> list[Journey]:
+async def search_ctm(origin: str, destination: str, travel_date: date):
     o = CITIES.get(origin)
     d = CITIES.get(destination)
     if not o or not d or not o.get("ctm_stop_id") or not d.get("ctm_city_id"):

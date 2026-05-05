@@ -4,19 +4,31 @@ from datetime import date, datetime
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-
 from data.cities import CITIES
 from models.journey import Journey
-from routers import alsa, casabus, ctm, sapst, supratours, aui, laayoune
+from routers import alsa, casabus, ctm, sapst, supratours, aui, laayoune, markoub, oncf
 from routers.ctm import search_ctm
 from routers.supratours import search_supratours
+from routers.markoub import search_markoub
+from routers.oncf import search_oncf
 
 # scaffolding
 app = FastAPI(title="tobis", version="0.1.0")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 # high iq play
-router_modules = [ctm.router, supratours.router, casabus.router, alsa.router, sapst.router, aui.router, laayoune.router]
+router_modules = [
+    ctm.router, 
+    supratours.router, 
+    casabus.router, 
+    alsa.router, 
+    sapst.router, 
+    aui.router, 
+    laayoune.router, 
+    markoub.router,
+    oncf.router
+]
+
 for module in router_modules:
     app.include_router(module)
 
@@ -31,8 +43,6 @@ def update_journey_status(journey: Journey) -> Journey:
     departure_time = datetime.fromisoformat(journey.departure)
     arrival_time = datetime.fromisoformat(journey.arrival)
     
-    # Fix for Supratours: Some APIs return timezone info, some don't. 
-    # If they don't, we force them to use Morocco time so we can compare them safely.
     if departure_time.tzinfo is None:
         departure_time = morocco_timezone.localize(departure_time)
     if arrival_time.tzinfo is None:
@@ -80,19 +90,26 @@ async def search_national_routes(
     if origin_city not in CITIES or destination_city not in CITIES:
         raise HTTPException(status_code=400, detail="Unknown city.")
 
-    ctm_results, supratours_results = await asyncio.gather(
+    # all apis
+    ctm_res, supra_res, markoub_res, oncf_res = await asyncio.gather(
         search_ctm(origin_city, destination_city, travel_date),
         search_supratours(origin_city, destination_city, travel_date),
+        search_markoub(origin_city, destination_city, travel_date),
+        search_oncf(origin_city, destination_city, travel_date)
     )
 
-    all_journeys = ctm_results + supratours_results
+    all_journeys = ctm_res + supra_res + markoub_res + oncf_res
     
-    processed_results = []
+    unique_journeys = {}
     for journey in all_journeys:
-        updated_journey = update_journey_status(journey)
-        processed_results.append(updated_journey)
+        # signature for trips
+        trip_signature = (journey.departure, journey.destination, journey.price)
         
-    # Sort everything by departure time so it looks nice
+        if trip_signature not in unique_journeys:
+            updated_journey = update_journey_status(journey)
+            unique_journeys[trip_signature] = updated_journey
+            
+    processed_results = list(unique_journeys.values())
     processed_results.sort(key=lambda item: item.departure)
     
     return processed_results
