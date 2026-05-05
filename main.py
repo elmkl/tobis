@@ -2,72 +2,97 @@ import asyncio
 import pytz
 from datetime import date, datetime
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+
 from data.cities import CITIES
 from models.journey import Journey
-from routers import alsa, casabus, ctm, sapst, supratours
+from routers import alsa, casabus, ctm, sapst, supratours, aui, laayoune
 from routers.ctm import search_ctm
 from routers.supratours import search_supratours
 
 # scaffolding
-app = FastAPI(title="tobis", description="API for public transit in Morocco", version="0.1.0",)
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"],)
+app = FastAPI(title="tobis", version="0.1.0")
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-app.include_router(ctm.router)
-app.include_router(supratours.router)
-app.include_router(casabus.router)
-app.include_router(alsa.router)
-app.include_router(sapst.router)
+# high iq play
+router_modules = [ctm.router, supratours.router, casabus.router, alsa.router, sapst.router, aui.router, laayoune.router]
+for module in router_modules:
+    app.include_router(module)
 
-_TZ = pytz.timezone("Africa/Casablanca")
+morocco_timezone = pytz.timezone("Africa/Casablanca")
 
-def morocco_now():
-    return datetime.now(_TZ).replace(tzinfo=None)
+def get_current_time():
+    return datetime.now(morocco_timezone)
 
-def tag_status(journey: Journey) -> Journey:
-    now = morocco_now()
-    dep = datetime.fromisoformat(journey.departure)
-    arr = datetime.fromisoformat(journey.arrival)
-    if now < dep:
+def update_journey_status(journey: Journey) -> Journey:
+    current_time = get_current_time()
+    
+    departure_time = datetime.fromisoformat(journey.departure)
+    arrival_time = datetime.fromisoformat(journey.arrival)
+    
+    # Fix for Supratours: Some APIs return timezone info, some don't. 
+    # If they don't, we force them to use Morocco time so we can compare them safely.
+    if departure_time.tzinfo is None:
+        departure_time = morocco_timezone.localize(departure_time)
+    if arrival_time.tzinfo is None:
+        arrival_time = morocco_timezone.localize(arrival_time)
+        
+    if current_time < departure_time:
         journey.status = "scheduled"
-    elif dep <= now <= arr:
+    elif departure_time <= current_time <= arrival_time:
         journey.status = "running"
     else:
         journey.status = "arrived"
+        
     return journey
 
-
-# TODO: make a web portal for reviewer :D
 @app.get("/")
 async def root():
     return {"name": "tobis", "version": "0.1.0", "status": "ok"}
 
+@app.get("/portal", response_class=FileResponse)
+async def web_portal():
+    return "portal.html"
+
 @app.get("/time")
-async def current_time():
-    now = datetime.now(_TZ)
-    return {"time": now.strftime("%H:%M"), "datetime": now.isoformat(), "timezone": "Africa/Casablanca"}
+async def current_time_endpoint():
+    current_time = get_current_time()
+    return {
+        "time": current_time.strftime("%H:%M"), 
+        "datetime": current_time.isoformat(), 
+        "timezone": "Africa/Casablanca"
+    }
 
 @app.get("/cities")
 async def list_cities():
     return {"count": len(CITIES), "cities": sorted(CITIES.keys())}
 
 @app.get("/national/search", response_model=list[Journey])
-async def search(
-    from_city: str = Query(..., alias="from"),
-    to_city: str = Query(..., alias="to"),
-    travel_date: date = Query(default_factory=date.today),
+async def search_national_routes(
+    from_city: str = Query(..., alias="from"), 
+    to_city: str = Query(..., alias="to"), 
+    travel_date: date = Query(default_factory=date.today)
 ):
-    from_city = from_city.lower().strip()
-    to_city = to_city.lower().strip()
+    origin_city = from_city.lower().strip()
+    destination_city = to_city.lower().strip()
 
-    if from_city not in CITIES or to_city not in CITIES:
-        raise HTTPException(status_code=400, detail="Unknown city. Please go to /cities endpoint a list of cities.")
+    if origin_city not in CITIES or destination_city not in CITIES:
+        raise HTTPException(status_code=400, detail="Unknown city.")
 
-    ctm_results, supra_results = await asyncio.gather(
-        search_ctm(from_city, to_city, travel_date),
-        search_supratours(from_city, to_city, travel_date),
+    ctm_results, supratours_results = await asyncio.gather(
+        search_ctm(origin_city, destination_city, travel_date),
+        search_supratours(origin_city, destination_city, travel_date),
     )
 
-    results = [tag_status(j) for j in ctm_results + supra_results]
-    results.sort(key=lambda j: j.departure)
-    return results
+    all_journeys = ctm_results + supratours_results
+    
+    processed_results = []
+    for journey in all_journeys:
+        updated_journey = update_journey_status(journey)
+        processed_results.append(updated_journey)
+        
+    # Sort everything by departure time so it looks nice
+    processed_results.sort(key=lambda item: item.departure)
+    
+    return processed_results

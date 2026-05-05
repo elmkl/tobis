@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>tobis api portal</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 800px; }
+        select, input, button { margin: 5px 0; padding: 5px; }
+    </style>
+</head>
+<body>
+    <h2>api portal</h2>
+    <a href="/docs" target="_blank">Docs</a> | 
+    <button onclick="switchTab('nat')">National Transit</button> | 
+    <button onclick="switchTab('urb')">Urban Transport</button>
+    <hr>
+
+    <div id="nat">
+        <h3>search national transit</h3>
+        <form id="natForm">
+            <select id="from" required><option value="">Loading cities...</option></select>
+            <select id="to" required><option value="">Loading cities...</option></select>
+            <input type="date" id="date" required>
+            <button>Search</button>
+        </form>
+        <pre id="natRes"></pre>
+    </div>
+
+    <div id="urb" style="display:none">
+        <h3>track urban transit</h3>
+        <form id="urbForm">
+            <select id="prov" onchange="updateUrbanForm()" required>
+                <option value="">Select Provider...</option>
+                <option value="alsa">ALSA</option>
+                <option value="laayoune">Laayoune Bus</option>
+                <option value="aui">AUI Ifrane</option>
+                <option value="sapst">SAPST Taghazout</option>
+            </select>
+            
+            <!-- This only shows up if ALSA is selected, since we need a city first -->
+            <span id="cityWrapper" style="display:none">
+                <select id="city" onchange="loadAlsaRoutes()">
+                    <option value="">Select City...</option>
+                </select>
+            </span>
+
+            <select id="route" required>
+                <option value="">Select Route...</option>
+            </select>
+
+            <button>Track Live</button>
+        </form>
+        <pre id="urbRes"></pre>
+    </div>
+
+<script>
+    // Figure out todays date automatically
+    document.getElementById('date').valueAsDate = new Date();
+    
+    function switchTab(tabName) {
+        if (tabName === 'nat') {
+            document.getElementById('nat').style.display = 'block';
+            document.getElementById('urb').style.display = 'none';
+        } else {
+            document.getElementById('nat').style.display = 'none';
+            document.getElementById('urb').style.display = 'block';
+        }
+    }
+
+    // fetch all cities and populate dropdowns
+    window.addEventListener('DOMContentLoaded', async function() {
+        try {
+            const response = await fetch('/cities');
+            const data = await response.json();
+            
+            let optionsHtml = '<option value="">Select a city...</option>';
+            for (let i = 0; i < data.cities.length; i++) {
+                let city = data.cities[i];
+                optionsHtml += '<option value="' + city + '">' + city.toUpperCase() + '</option>';
+            }
+            
+            document.getElementById('from').innerHTML = optionsHtml;
+            document.getElementById('to').innerHTML = optionsHtml;
+        } catch (error) {
+            console.error("Failed to load cities", error);
+        }
+    });
+
+    // figure out what happens when you select a provider in the urban form
+    async function updateUrbanForm() {
+        const provider = document.getElementById('prov').value;
+        const citySelect = document.getElementById('city');
+        const routeSelect = document.getElementById('route');
+        
+        routeSelect.innerHTML = '<option value="">Loading routes...</option>';
+
+        if (provider === 'alsa') {
+            document.getElementById('cityWrapper').style.display = 'inline';
+            try {
+                const response = await fetch('/urban/alsa/cities');
+                const cities = await response.json();
+                
+                let optionsHtml = '<option value="">Select City...</option>';
+                for (let i = 0; i < cities.length; i++) {
+                    optionsHtml += '<option value="' + cities[i] + '">' + cities[i].toUpperCase() + '</option>';
+                }
+                citySelect.innerHTML = optionsHtml;
+            } catch(error) { 
+                citySelect.innerHTML = '<option value="">Error loading</option>'; 
+            }
+            routeSelect.innerHTML = '<option value="">Select Route...</option>';
+            
+        } else if (provider) {
+            // hide the city dropdown otherwsie
+            document.getElementById('cityWrapper').style.display = 'none';
+            citySelect.value = ''; 
+            
+            let url = '';
+            if (provider === 'laayoune') { url = '/urban/laayoune/routes'; }
+            if (provider === 'aui') { url = '/urban/ifrane-aui/routes'; }
+            if (provider === 'sapst') { url = '/urban/taghazout-bay/routes'; }
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const routes = data.routes || [];
+                
+                let optionsHtml = '<option value="">Select Route...</option>';
+                for (let i = 0; i < routes.length; i++) {
+                    let r = routes[i];
+                    optionsHtml += '<option value="' + r.id + '">' + r.id + ' - ' + (r.name || '') + '</option>';
+                }
+                routeSelect.innerHTML = optionsHtml;
+            } catch(error) {
+                routeSelect.innerHTML = '<option value="">Error loading</option>';
+            }
+        }
+    }
+
+    // fetch routes specific to cities served by ALSA
+    async function loadAlsaRoutes() {
+        const city = document.getElementById('city').value;
+        const routeSelect = document.getElementById('route');
+        
+        if (!city) {
+            routeSelect.innerHTML = '<option value="">Select Route...</option>';
+            return;
+        }
+        
+        routeSelect.innerHTML = '<option value="">Loading...</option>';
+        try {
+            const response = await fetch('/urban/alsa/' + city + '/routes');
+            const data = await response.json();
+            
+            let optionsHtml = '<option value="">Select Route...</option>';
+            if (data.lines) {
+                for (let i = 0; i < data.lines.length; i++) {
+                    let l = data.lines[i];
+                    optionsHtml += '<option value="' + l.id + '">' + l.id + ' - ' + (l.name || '') + '</option>';
+                }
+            }
+            routeSelect.innerHTML = optionsHtml;
+        } catch(error) {
+            routeSelect.innerHTML = '<option value="">API Error / Offline</option>';
+        }
+    }
+
+    // search national transit options
+    document.getElementById('natForm').onsubmit = async function(event) {
+        event.preventDefault();
+        const resultsDiv = document.getElementById('natRes');
+        resultsDiv.textContent = "Loading...";
+        
+        try {
+            const fromCity = document.getElementById('from').value;
+            const toCity = document.getElementById('to').value;
+            const travelDate = document.getElementById('date').value;
+            
+            const response = await fetch('/national/search?from=' + fromCity + '&to=' + toCity + '&travel_date=' + travelDate);
+            const data = await response.json();
+            resultsDiv.textContent = JSON.stringify(data, null, 2);
+        } catch(error) { 
+            resultsDiv.textContent = error; 
+        }
+    };
+
+    // search urban transit options
+    document.getElementById('urbForm').onsubmit = async function(event) {
+        event.preventDefault();
+        const resultsDiv = document.getElementById('urbRes');
+        resultsDiv.textContent = "Loading...";
+        
+        try {
+            const provider = document.getElementById('prov').value;
+            const city = document.getElementById('city').value;
+            const route = document.getElementById('route').value;
+            
+            let url = '';
+            if (provider === 'alsa') { url = '/urban/alsa/' + city + '/track/' + route; }
+            if (provider === 'laayoune') { url = '/urban/laayoune/track/' + route; }
+            if (provider === 'aui') { url = '/urban/ifrane-aui/track/' + route; }
+            if (provider === 'sapst') { url = '/urban/taghazout-bay/track'; }
+
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.detail || "Error " + response.status);
+            }
+            
+            resultsDiv.textContent = JSON.stringify(data, null, 2);
+        } catch(error) { 
+            resultsDiv.textContent = error; 
+        }
+    };
+</script>
+</body>
+</html>
