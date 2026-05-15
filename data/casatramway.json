@@ -1,0 +1,62 @@
+{
+  "operator": "Casa Tramway & Busway",
+  "operating_hours": {
+    "T1": {"start": "05:30", "end": "22:30", "frequency_mins": 5, "duration_mins": 75},
+    "T2": {"start": "05:30", "end": "22:30", "frequency_mins": 6, "duration_mins": 75},
+    "T3": {"start": "05:30", "end": "22:30", "frequency_mins": 10, "duration_mins": 60},
+    "T4": {"start": "05:30", "end": "22:30", "frequency_mins": 10, "duration_mins": 60},
+    "BW1": {"start": "05:30", "end": "22:30", "frequency_mins": 5, "duration_mins": 45},
+    "BW2": {"start": "05:30", "end": "22:30", "frequency_mins": 5, "duration_mins": 45}
+  },
+  "lines": {
+    "T1": [
+      "Sidi Moumen - Terminus", "Ennassim", "Mohammed Zefzaf", "Centre de Maintenance",
+      "Hôpital Sidi Moumen", "Attacharouk", "Okba Ibn Nafii", "Forces Auxiliaires",
+      "Hay Raja", "Ibn Tachfine", "Hay Mohammadi", "Achouhada", "Ali Yaata",
+      "Grande Ceinture", "Les Anciens Abattoirs", "Bihmad", "Casa Voyageurs",
+      "Place Al Yassir", "La Résistance", "Mohammed Diouri", "Marché Central",
+      "Place des Nations Unies", "Place Mohammed V", "Avenue Hassan II",
+      "Les Hôpitaux", "Faculté de Médecine", "Abdelmoumen", "Bachkou",
+      "Mekka", "Gare Oasis", "Panoramique", "Technopark", "Zénith",
+      "Gare Casa Sud", "Facultés", "Laymoune", "Lissasfa - Terminus"
+    ],
+    "T2": [
+      "Ain Diab Plage - Terminus", "Littoral", "Hay Hassani", "Sidi Abderrahmane",
+      "Cité de L'air", "Abdellah Ben Cherif", "Place Financière", "Anfa Park",
+      "Anfa Club", "Beauséjour", "Ghandi", "Riviera", "Derb Ghalef", "Anoual",
+      "Hermitage", "2 Mars", "El Fida", "Place Sraghna", "Derb Sultan",
+      "Hay El Farah", "Derb Milan", "Cimetière Achouhada", "Hay Adil",
+      "Mdakra", "Kissariat Hay Mohammadi", "Carrières Centrales", "Dar Laman",
+      "Wifaq", "Al Amane", "Préfecture Ain Sbaa", "Gare de Ain Sbaa",
+      "Abi Dar El Ghafari", "Sidi Bernoussi - Terminus"
+    ],
+    "T3": [
+      "Casa Port - Terminus", "Mohammed Smiha", "Place de la Victoire",
+      "Mohammed Zerktouni", "Habous", "Garage Allal", "Derb Tolba",
+      "Derb Chorfa", "Abou Chouaib Doukali", "Afriquia", "Dar Attouzani",
+      "Bd Mohammed VI", "6 Novembre", "Abdessalam Ennaciri", "Jardin Alesco",
+      "Hay Lalla Meriem", "Idriss El Allam", "Abdelkader Essahraoui",
+      "10 mars", "Hay Al Wahda - Terminus"
+    ],
+    "T4": [
+      "Parc de la Ligue Arabe - Terminus", "Mers Sultan", "Jaber Ibn Hayane",
+      "La Gironde", "Ifni", "Ain Borja", "Gare Oulad Ziane", "Hay Tissir",
+      "Jardin Chtaiba", "Bd Nil", "Hay Assalama", "Mohammed Bouziane",
+      "Driss El Harti", "Hay El Falah", "Faculté Ben Msik", "Mohammed Joudar",
+      "Moulay Rachid", "Zone Industrielle", "Mohammed Erradi - Terminus"
+    ],
+    "BW1": [
+      "Salmia 2 - Terminus", "Sbata", "Stade Tessema", "Al Joulane", "Lahrizi",
+      "Jardin Sunday", "Amgala", "Al Qods", "Sefrou", "Taza", "Al Inara",
+      "Oulad Haddou", "Hay Cherifa", "Taddart", "Azzohour", "Californie",
+      "Casa Near-Shore", "Al Mostakbal", "Sidi Maarouf", "Omar El Khayam - Terminus"
+    ],
+    "BW2": [
+      "Oulmes - Terminus", "Yaacoub Al Mansour", "C.I.L.", "Aéropostale",
+      "Les musées", "Oued Oum Rabia", "Oued Laou", "Oued Beht", "Moulouya",
+      "Haj Fateh", "Essafa", "Moulay Thami", "Abouab Oulfa", "La Rocade",
+      "La Perception", "Les Jardins D'Errahma", "Errahma", "Oued Sbou",
+      "Les Ecoles", "Ouled Ahmed", "La Ferme", "Ouled Azzouz - Terminus"
+    ]
+  }
+}

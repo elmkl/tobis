@@ -1,0 +1,21 @@
+{
+    "operator": "Amalway Agadir Trambus",
+    "pricing": {
+      "card_plus_first_trip_MAD": 10,
+      "recharge_per_trip_MAD": 5,
+      "free_access": "Children under 6"
+    },
+    "route_info": {
+      "distance_km": 15,
+      "total_stations": 34
+    },
+    "stops": [
+      "Port", "Marina", "Mohammed V", "Wilaya", "Place Al Amal", 
+      "Rue de la Foire", "Al Inbiaat", "Al Mouquaouama", "Abattoir", 
+      "Al Kamra", "Hay Al Hassani", "Souk Al Ahad", "Amsernat", 
+      "Al Massira", "Al Fidiya", "Dakhla", "Hassan I", "Place Al Ouid", 
+      "Salam", "Facultes", "Al Houda", "Al Mahaj", "Ajdir", 
+      "Place Argane", "Ahl Souss", "Tassila", "Targa", "Sidi Fares", 
+      "Azaghar", "Assaka", "Souri", "Souk Lakhimis", "Azzaitoune", "El Hajeb"
+    ]
+  }
