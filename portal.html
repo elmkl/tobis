@@ -55,39 +55,35 @@
             align-items: center;
         }
 
-        /* Form Container */
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 400px; /* Gives the form a nice uniform width */
+            max-width: 400px;
             margin-bottom: 20px;
         }
 
-        /* Wraps each label/input pair in a horizontal row */
         .form-group {
             display: flex;
             flex-direction: row;
             align-items: center;
             width: 100%;
-            gap: 15px; /* Space between label and input */
+            gap: 15px;
             margin-bottom: 15px;
         }
 
-        /* THIS IS THE FIX: Lock the labels to a specific width so they don't push the inputs */
         .form-group label {
             font-weight: bold;
-            width: 60px; /* Fixed width */
-            min-width: 60px; /* Prevents it from crushing down */
-            text-align: right; /* Aligns the colons perfectly */
+            width: 60px;
+            min-width: 60px;
+            text-align: right;
             margin: 0;
         }
 
-        /* Makes the inputs take up exactly the remaining space in the row */
         .form-group select, 
         .form-group input {
-            flex: 1; /* Stretch to fill */
+            flex: 1;
             width: 100%;
             font-family: inherit;
             font-size: 1em;
@@ -136,7 +132,6 @@
             word-wrap: break-word;
         }
         
-        /* Keep ALSA city wrapper behaving like the other rows */
         #cityWrapper {
             display: none;
             flex-direction: row;
@@ -204,6 +199,8 @@
                     <option value="laayoune">Laayoune Bus</option>
                     <option value="aui">AUI Ifrane</option>
                     <option value="sapst">SAPST Taghazout</option>
+                    <option value="amalway">Amalway Agadir (BRT)</option>
+                    <option value="casatramway">Casa Tramway & Busway</option>
                 </select>
             </div>
             
@@ -229,7 +226,7 @@
     </div>
 
 <script>
-    // get tomorrows date
+    // Set date to tomorrow automatically
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     document.getElementById('date').valueAsDate = tomorrow;
@@ -279,7 +276,7 @@
         routeSelect.innerHTML = '<option value="">Loading routes...</option>';
 
         if (provider === 'alsa') {
-            cityWrapper.style.display = 'flex'; // Uses flex so it stays side-by-side
+            cityWrapper.style.display = 'flex'; 
             try {
                 const response = await fetch('/urban/alsa/cities');
                 const cities = await response.json();
@@ -302,6 +299,8 @@
             if (provider === 'laayoune') { url = '/urban/laayoune/routes'; }
             if (provider === 'aui') { url = '/urban/ifrane-aui/routes'; }
             if (provider === 'sapst') { url = '/urban/taghazout-bay/routes'; }
+            if (provider === 'amalway') { url = '/urban/amalway/routes'; }
+            if (provider === 'casatramway') { url = '/urban/casatramway/routes'; }
 
             try {
                 const response = await fetch(url);
@@ -391,6 +390,8 @@
             if (provider === 'laayoune') { url = '/urban/laayoune/track/' + route; }
             if (provider === 'aui') { url = '/urban/ifrane-aui/track/' + route; }
             if (provider === 'sapst') { url = '/urban/taghazout-bay/track'; }
+            if (provider === 'amalway') { url = '/urban/amalway/track/' + route; }
+            if (provider === 'casatramway') { url = '/urban/casatramway/track/' + route; }
 
             const response = await fetch(url);
             const data = await response.json();

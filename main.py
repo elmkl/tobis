@@ -6,12 +6,11 @@ from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from data.cities import CITIES
 from models.journey import Journey
-from routers import alsa, casabus, ctm, sapst, supratours, aui, laayoune, markoub, oncf
+from routers import alsa, casabus, ctm, sapst, supratours, aui, laayoune, markoub, oncf, amalway, casatramway
 from routers.ctm import search_ctm
 from routers.supratours import search_supratours
 from routers.markoub import search_markoub
 from routers.oncf import search_oncf
-
 # scaffolding
 app = FastAPI(title="tobis", version="0.1.0")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
@@ -26,7 +25,9 @@ router_modules = [
     aui.router, 
     laayoune.router, 
     markoub.router,
-    oncf.router
+    oncf.router,
+    amalway.router,
+    casatramway.router
 ]
 
 for module in router_modules:
